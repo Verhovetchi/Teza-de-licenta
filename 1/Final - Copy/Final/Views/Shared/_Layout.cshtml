@@ -1,0 +1,148 @@
+﻿@using Final.Models;
+@using System.Data.Entity;
+@using System.Web;
+
+@{
+     SoccerContext db = new SoccerContext();
+
+     var teams = db.Teams.OrderByDescending(p=>p.Points);
+
+     db.Players.Include(p => p.Team);
+     db.Players.ToList();
+
+     int i = 1;
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="utf-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+     <title>
+          @ViewBag.Title
+     </title>
+     <link href="~/Content/Style.css" rel="stylesheet" type="text/css">
+     <link rel="icon" href="~/Content/icon/barcaIcon.ico">
+</head>
+
+<body>
+     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-tod" id="nav">
+          <a class="navbar-brand" href="/Home/Index">
+               <img src="~/Content/Images/Logo.png" alt="Mes que un club!" id="logo" />
+          </a>
+          
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown" style="opacity:1;">
+                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Dropdown
+                         </a>
+                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                         </div>
+                    </li>
+                    <li class="nav-item">
+                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+               </ul>
+               <form class="form-inline my-2 my-lg-0">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+               </form>
+          </div>
+     </nav>
+
+     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+
+
+     <div id="Content">
+          <div id="Article">
+               @RenderBody()
+          </div>
+          <div id="Clasament">
+               <h2>
+                    <center>
+                         <img src="~/Content/Images/LaLiga.png" alt="La Liga Santander" title="La Liga Santander" id="Santander" />
+                         Clasament
+                    </center>
+               </h2>
+                    @Html.Partial("Clasament", teams.Include(t => t.Image).ToList())
+               <div>
+
+
+
+               </div>
+          </div>
+     </div>
+
+
+
+
+
+
+
+     <footer>
+          <div id="Visca">
+               <marquee direction="right">
+
+                    <span style="color:blue">
+                         &copy; @DateTime.Now.Year
+                    </span>
+
+                    <span style="color:red">
+                         Visca el Barça
+                    </span>
+
+                    <span style="color:blue">
+                         . Visca Catalunya!
+                    </span>
+
+               </marquee>
+          </div>
+
+          <div id="Info">
+               <ul>
+                    <li id="marca">
+                         <a href="https://www.marca.com/futbol/barcelona.html" target="_blank" title="Marca">
+                              <img src="~/Content/Images/Marca.png" class="edition">
+                         </a>
+                    </li>
+                    <li id="franceFootball">
+                         <a href="https://www.francefootball.fr/" target="_blank" title="France Football">
+                              <img src="~/Content/Images/FranceFootball.png" class="edition">
+                         </a>
+                    </li>
+
+                    <li id="mundoDeportivo">
+                         <a href="https://inosmi.ru/mundodeportivo_com/" target="_blank" title="Mundo Deportivo">
+                              <img src="~/Content/Images/Mundo Deportivo.jpg" class="edition">
+                         </a>
+                    </li>
+               </ul>
+          </div>
+     </footer>
+
+     @Scripts.Render("~/bundles/jquery")
+     @Scripts.Render("~/bundles/bootstrap")
+     @RenderSection("scripts", required: false)
+
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>

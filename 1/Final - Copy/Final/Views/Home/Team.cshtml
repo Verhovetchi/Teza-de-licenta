@@ -1,0 +1,55 @@
+﻿@{
+     ViewBag.Title = "Team";
+}
+
+     
+          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+               <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Squad</a>
+               </li>
+               <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+               </li>
+               <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+               </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+               <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                    <table class="table table-sm">
+                         <thead>
+                              <tr>
+                                   <th scope="col">Num.</th>
+                                   <th scope="col">Name</th>
+                                   <th scope="col">Surname</th>
+                                   <th scope="col">Age</th>
+                                   <th scope="col">Position</th>
+                                   <th scope="col">Height</th>
+                                   <th scope="col">Weight</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              @foreach (var item in ViewBag.Players)
+                              {
+                                   <tr>
+                                        <td class="table-info">@item.Number</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Surname</td>
+                                        <td>@item.Age(item.Born_Date)</td>
+                                        <td>@item.Position</td>
+                                        <td>@item.Height</td>
+                                        <td>@item.Weight</td>
+                                   </tr>
+                              }
+                         </tbody>
+                    </table>
+
+
+
+
+
+               </div>
+               <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+               <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+          </div>
